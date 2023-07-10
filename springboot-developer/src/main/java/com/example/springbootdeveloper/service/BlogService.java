@@ -21,4 +21,8 @@ public class BlogService {
         return blogRepository.save(request.toEntity());
     }
 
+    public List<Article> findAll(){
+        return blogRepository.findAll();
+    }
+
 }

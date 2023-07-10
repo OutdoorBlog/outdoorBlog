@@ -6,6 +6,8 @@ spring:
       hibernate:
         format_sql: true
     defer-datasource-initialization: true
+    debug: true
+
 
 
   datasource:
