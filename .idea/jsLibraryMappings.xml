@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptLibraryMappings">
+    <file url="file://$PROJECT_DIR$" libraries="{bootstrap}" />
+    <file url="file://$PROJECT_DIR$/springboot-developer" libraries="{bootstrap}" />
+    <file url="file://$PROJECT_DIR$/springboot-developer/build/generated/sources/annotationProcessor/java/main" libraries="{bootstrap}" />
+    <file url="file://$PROJECT_DIR$/springboot-developer/src/main" libraries="{bootstrap}" />
+    <file url="file://$PROJECT_DIR$/springboot-developer/src/test" libraries="{bootstrap}" />
+  </component>
+</project>
