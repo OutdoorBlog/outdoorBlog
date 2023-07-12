@@ -1,16 +1,15 @@
 package com.example.springbootdeveloper.service;
 
-import lombok.RequiredArgsConstructor;
-import com.example.springbootdeveloper.domain.User;
 import com.example.springbootdeveloper.dto.AddUserRequest;
 import com.example.springbootdeveloper.repository.UserRepository;
+import com.example.springbootdeveloper.domain.User;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
 public class UserService {
-
     private final UserRepository userRepository;
 
     public Long save(AddUserRequest dto) {
@@ -31,5 +30,5 @@ public class UserService {
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("Unexpected user"));
     }
-}
 
+}

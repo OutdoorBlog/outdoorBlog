@@ -1,6 +1,12 @@
 package com.example.springbootdeveloper.config;
 
 import lombok.RequiredArgsConstructor;
+import com.example.springbootdeveloper.config.jwt.TokenProvider;
+import com.example.springbootdeveloper.config.oauth.OAuth2AuthorizationRequestBasedOnCookieRepository;
+import com.example.springbootdeveloper.config.oauth.OAuth2SuccessHandler;
+import com.example.springbootdeveloper.config.oauth.OAuth2UserCustomService;
+import com.example.springbootdeveloper.repository.RefreshTokenRepository;
+import com.example.springbootdeveloper.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
