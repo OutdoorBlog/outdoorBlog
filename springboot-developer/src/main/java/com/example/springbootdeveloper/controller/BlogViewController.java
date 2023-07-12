@@ -2,6 +2,7 @@ package com.example.springbootdeveloper.controller;
 
 import com.example.springbootdeveloper.domain.Article;
 import com.example.springbootdeveloper.dto.ArticleListViewResponse;
+import com.example.springbootdeveloper.dto.ArticleViewResponse;
 import com.example.springbootdeveloper.service.BlogService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -27,5 +28,13 @@ public class BlogViewController {
         model.addAttribute("articles", articles); // 블로그 글 리스트 저장
 
         return "articleList"; //articleList.html 의 뷰 조회
+    }
+
+    @GetMapping("/articles/{id}")
+    public String getArticle(@PathVariable Long id, Model model) {
+        Article article = blogService.findById(id);
+        model.addAttribute("article", new ArticleViewResponse(article));
+
+        return "article";
     }
 }
