@@ -40,6 +40,12 @@ dependencies {
     testImplementation 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
+
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc' // Jdbc, Driver
+    implementation 'com.h2database:h2' // h2 : implementation
+
+
+    runtimeOnly 'com.mysql:mysql-connector-j'
 }
 
 test {

@@ -1,16 +1,23 @@
+management.endpoints.web.exposure.include: "*"
 spring:
   jpa:
+    hibernate.ddl-auto: create
     show-sql: true
     properties:
       hibernate:
         format_sql: true
     defer-datasource-initialization: true
+    dialect: org.hibernate.dialect.MySQL5InnoDBDialect
   datasource:
 #    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:testdb
-    username: sa
-    password:
+#    url: jdbc:h2:mem:testdb
+#    username: sa
+#    password:
 #    url: jdbc:h2:tcp://localhost/~/mem:testdb
+    url: jdbc:mysql://localhost:3306/board_project
+    username: lee
+    password: outdoor_project1!
+    driver-class-name: com.mysql.cj.jdbc.Driver
   h2:
     console:
       enabled: true
