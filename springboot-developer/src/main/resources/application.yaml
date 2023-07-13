@@ -7,9 +7,13 @@ spring:
     defer-datasource-initialization: true
   datasource:
 #    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:testdb
-    username: sa
-    password:
+    url: jdbc:mysql://localhost:3306/springboard
+    username: leesunguk
+    password: Naver920811!
+    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:h2:mem:testdb
+#    username: sa
+#    password:
 #    url: jdbc:h2:tcp://localhost/~/mem:testdb
   h2:
     console:
