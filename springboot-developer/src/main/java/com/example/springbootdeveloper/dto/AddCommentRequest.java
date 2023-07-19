@@ -5,7 +5,6 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class AddUserRequest {
-    private String email;
-    private String password;
+public class AddCommentRequest {
+    private String content;
 }

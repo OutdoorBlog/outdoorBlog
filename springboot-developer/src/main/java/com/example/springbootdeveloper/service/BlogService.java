@@ -10,8 +10,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 
-
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -57,6 +57,13 @@ public class BlogService {
         if (!article.getAuthor().equals(userName)) {
             throw new IllegalArgumentException("not authorized");
         }
+    }
+
+    public List<Article> searchArticlesByKeyword(String keyword) {
+        // 키워드를 포함하는 게시글들을 검색합니다.
+        return blogRepository.findAll().stream()
+                .filter(article -> article.getTitle().contains(keyword) || article.getContent().contains(keyword))
+                .collect(Collectors.toList());
     }
 
 }
