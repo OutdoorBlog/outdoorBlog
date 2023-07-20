@@ -2,7 +2,9 @@ package com.example.springbootdeveloper.controller;
 
 import com.example.springbootdeveloper.domain.Article;
 import com.example.springbootdeveloper.dto.ArticleListViewResponse;
+import com.example.springbootdeveloper.dto.CommentResponse;
 import com.example.springbootdeveloper.service.BlogService;
+import com.example.springbootdeveloper.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,14 +12,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.example.springbootdeveloper.dto.ArticleViewResponse;
+import org.w3c.dom.Comment;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Controller
 public class BlogViewController {
 
     private final BlogService blogService;
+    private final CommentService commentService;
 
     @GetMapping("/articles")
     public String getArticles(Model model) {
@@ -50,4 +55,21 @@ public class BlogViewController {
 
         return "newArticle";
     }
+    @GetMapping("/search")
+    public String searchArticles(@RequestParam String keyword, Model model) {
+        List<ArticleViewResponse> searchResults = blogService.searchArticlesByKeyword(keyword)
+                .stream()
+                .map(ArticleViewResponse::new)
+                .toList();
+        model.addAttribute("articles", searchResults);
+
+        return "searchResults";
+    }
+
+//    @GetMapping("/articles/{articleId}/comments")
+//    public List<CommentResponse> getCommentsForArticle(@PathVariable Long articleId) {
+//        Article article = blogService.findById(articleId);
+//        List<Comment> comments = commentService.getCommentsForArticle(article);
+//        return comments.stream().map(CommentResponse::new).collect(Collectors.toList());
+//    }
 }

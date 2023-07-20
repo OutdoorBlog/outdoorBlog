@@ -62,4 +62,15 @@ public class BlogApiController {
                 .body(updatedArticle);
     }
 
+    @GetMapping("/api/articles/search")
+    public ResponseEntity<List<ArticleResponse>> searchArticles(@RequestParam String keyword) {
+        List<ArticleResponse> articles = blogService.searchArticlesByKeyword(keyword)
+                .stream()
+                .map(ArticleResponse::new)
+                .toList();
+
+        return ResponseEntity.ok()
+                .body(articles);
+    }
+
 }
