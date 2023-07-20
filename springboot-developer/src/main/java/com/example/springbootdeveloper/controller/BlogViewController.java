@@ -68,4 +68,22 @@ public class BlogViewController {
 //        List<Comment> comments = commentService.getCommentsForArticle(article);
 //        return comments.stream().map(CommentResponse::new).collect(Collectors.toList());
 //    }
+
+//    @PostMapping("/articles/{articleId}/comments")
+//    public String addComment(@PathVariable Long articleId, @RequestParam String comment) {
+//        // Retrieve the article by ID
+//        Article article = articleService.findById(articleId);
+//
+//        // Create a new comment
+//        Comment newComment = new Comment();
+//        newComment.setArticle(article);
+//        newComment.setContent(comment);
+//
+//        // Save the comment
+//        commentService.save(newComment);
+//
+//        // Redirect to the article page
+//        return "redirect:/articles/" + articleId;
+//    }
+
 }
