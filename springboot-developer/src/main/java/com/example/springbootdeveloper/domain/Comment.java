@@ -1,12 +1,16 @@
 package com.example.springbootdeveloper.domain;
+
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
+@EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
@@ -17,6 +21,13 @@ public class Comment {
     @Column(name = "id", updatable = false)
     private Long id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "article_id", nullable = false)
+    private Article article;
+
+    @Column(name = "author", nullable = false)
+    private String author;
+
     @Column(name = "content", nullable = false)
     private String content;
 
@@ -24,18 +35,17 @@ public class Comment {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "article_id", nullable = false)
-    private Article article;
+    @LastModifiedDate
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
-
-    public Comment(String content, Article article, User user) {
-        this.content = content;
+    public Comment(Article article, String author, String content) {
         this.article = article;
-        this.user = user;
+        this.author = author;
+        this.content = content;
+    }
+
+    public void update(String content) {
+        this.content = content;
     }
 }
-

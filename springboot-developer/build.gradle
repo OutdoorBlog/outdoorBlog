@@ -30,6 +30,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
     implementation 'io.jsonwebtoken:jjwt:0.9.1'
     implementation 'javax.xml.bind:jaxb-api:2.3.1'
+    implementation 'javax.persistence:javax.persistence-api:2.2' // Adjust the version as needed
+
 
     runtimeOnly 'com.h2database:h2'
 

@@ -3,8 +3,8 @@ package com.example.springbootdeveloper.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter
 @Getter
+@Setter
 public class AddCommentRequest {
     private String content;
 }

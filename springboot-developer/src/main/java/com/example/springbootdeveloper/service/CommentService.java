@@ -1,11 +1,11 @@
 package com.example.springbootdeveloper.service;
+
 import com.example.springbootdeveloper.domain.Article;
 import com.example.springbootdeveloper.domain.Comment;
-import com.example.springbootdeveloper.domain.User;
+import com.example.springbootdeveloper.dto.AddCommentRequest;
 import com.example.springbootdeveloper.repository.CommentRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
@@ -13,38 +13,37 @@ import org.springframework.stereotype.Service;
 public class CommentService {
 
     private final CommentRepository commentRepository;
-    private final BlogService blogService;
-    private final UserService userService;
 
     @Transactional
-    public Comment addComment(Long articleId, String content) {
-        User currentUser = getCurrentUser();
-        Article article = blogService.findById(articleId);
-
-        Comment comment = new Comment(content, article, currentUser);
+    public Comment save(Article article, AddCommentRequest request, String author) {
+        Comment comment = new Comment(article, author, request.getContent());
         return commentRepository.save(comment);
     }
 
     @Transactional
-    public void deleteComment(Long commentId) {
-        Comment comment = commentRepository.findById(commentId)
+    public Comment update(Article article, long commentId, AddCommentRequest request, String author) {
+        Comment comment = commentRepository.findByIdAndArticleId(commentId, article.getId())
                 .orElseThrow(() -> new IllegalArgumentException("not found : " + commentId));
 
-        authorizeCommentAuthor(comment);
+        authorizeCommentAuthor(comment, author);
+        comment.update(request.getContent());
+
+        return comment;
+    }
+
+    @Transactional
+    public void delete(Article article, long commentId, String author) {
+        Comment comment = commentRepository.findByIdAndArticleId(commentId, article.getId())
+                .orElseThrow(() -> new IllegalArgumentException("not found : " + commentId));
+
+        authorizeCommentAuthor(comment, author);
         commentRepository.delete(comment);
     }
 
-    // 댓글을 작성한 유저인지 확인
-    private void authorizeCommentAuthor(Comment comment) {
-        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
-        if (!comment.getUser().getUsername().equals(userName)) {
+    // 댓글 작성자인지 확인
+    private static void authorizeCommentAuthor(Comment comment, String author) {
+        if (!comment.getAuthor().equals(author)) {
             throw new IllegalArgumentException("not authorized");
         }
-    }
-
-    // 현재 로그인한 유저 정보 가져오기
-    private User getCurrentUser() {
-        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
-        return userService.findByEmail(userName);
     }
 }

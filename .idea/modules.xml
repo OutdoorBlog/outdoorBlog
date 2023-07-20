@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/outdoorBlog.iml" filepath="$PROJECT_DIR$/.idea/outdoorBlog.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/springboot-developer.main.iml" filepath="$PROJECT_DIR$/.idea/modules/springboot-developer.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/springboot-developer.test.iml" filepath="$PROJECT_DIR$/.idea/modules/springboot-developer.test.iml" />
     </modules>
   </component>
 </project>

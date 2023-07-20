@@ -2,9 +2,7 @@ package com.example.springbootdeveloper.controller;
 
 import com.example.springbootdeveloper.domain.Article;
 import com.example.springbootdeveloper.dto.ArticleListViewResponse;
-import com.example.springbootdeveloper.dto.CommentResponse;
 import com.example.springbootdeveloper.service.BlogService;
-import com.example.springbootdeveloper.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.example.springbootdeveloper.dto.ArticleViewResponse;
-import org.w3c.dom.Comment;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,7 +19,6 @@ import java.util.stream.Collectors;
 public class BlogViewController {
 
     private final BlogService blogService;
-    private final CommentService commentService;
 
     @GetMapping("/articles")
     public String getArticles(Model model) {
